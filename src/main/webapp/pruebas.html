@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+    <link rel="stylesheet" href="estilos/style.css">
+</head>
+<body>
+
+<div class="mensaje">
+    <h3>Listado de Usuarios</h3>
+</div>
+
+<div class="tabla">
+<table>
+    <thead class="fondo">
+        <tr>
+            <th>ID</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Minutos Semana</th>
+            <th>Acumulado Horas</th>
+            <th>Acumulado Minutos</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Juan</td>
+            <td>Perez</td>
+            <td>150</td>
+            <td>2</td>
+            <td>300</td>
+            <td>Administrador</td>
+            <td>
+                <button class="editar" onclick="editar(1)">Editar</button>
+                <button class="eliminar" onclick="eliminar(1)">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Juan</td>
+            <td>Perez</td>
+            <td>150</td>
+            <td>2</td>
+            <td>300</td>
+            <td>Administrador</td>
+            <td>
+                <button class="editar" onclick="editar(1)">Editar</button>
+                <button class="eliminar" onclick="eliminar(1)">Eliminar</button>
+            </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Juan</td>
+            <td>Perez</td>
+            <td>150</td>
+            <td>2</td>
+            <td>300</td>
+            <td>Usuario</td>
+            <td>
+                <button class="editar" onclick="editar(1)">Editar</button>
+                <button class="eliminar" onclick="eliminar(1)">Eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<script src="js/script.js"></script>
+</body>
+</html>

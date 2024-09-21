@@ -1,0 +1,268 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-image: linear-gradient(to left, #2170b4, #1b7cbf, #1587ca, #0d93d4, #049fde, #249ee2, #399ce6, #4a9ae9, #7088e0, #9073ce, #a85db4, #b84493);
+    padding: 1.8em 3em;
+    color: white;
+}
+
+/* Marca del sitio */
+.navbar-brand {
+    font-size: 2em;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    display: flex;
+    gap: 0.5em;
+}
+
+/*Imagen del logo*/
+.navbar-brand img {
+    width: 55px;
+}
+
+/* Lista de navegación */
+.nav-list {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: auto 0 auto 130px;
+}
+
+/* Ocultar la lista de navegación inicialmente en dispositivos móviles */
+.nav-list li {
+    padding: 1em 1.5em;
+    transition: background-color 0.3s ease-in-out;
+    border-radius: 0.5em;
+    border: 1px;
+}
+
+/*Lista de navegación HOVER*/
+.nav-list li:hover {
+    background-color: #04132c;
+    transition: background-color 0.3s ease-in-out;
+    color: #fff;
+    padding: 1em 1.5em;
+    border: 1px solid #fff;
+    border-radius: 0.5em;
+}
+
+/* Enlaces de navegación */
+.nav-list a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+/* Ícono del menú hamburguesa */
+.menu-icon {
+    display: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    /* Mostrar el menú hamburguesa */
+    .menu-icon {
+        display: block;
+    }
+
+    /* Ocultar la lista de navegación por defecto */
+    .nav-list {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        background-color: #333;
+        width: 200px;
+        gap: 0;
+    }
+
+    /* Mostrar la lista de navegación cuando se activa */
+    .nav-list.active {
+        display: flex;
+    }
+
+    /* Estilos para los elementos de la lista */
+    .nav-list li {
+        padding: 10px;
+        text-align: center;
+    }
+}
+
+/*Parte del cuerpo incluye un mensaje*/
+.mensaje{
+    text-align: center;
+    font-size: 1.2em;
+    color: #003459;
+    padding: 2em 0;
+}
+
+.contenido{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1em;
+}
+
+.contenido img{
+    width: 158px;
+    height: auto;
+    margin: 1em;
+}
+
+.bloque{
+    border: 3px solid #04132c;
+    border-radius: 10px;
+    width: 20em;
+}
+
+.boton{
+    background-color: #003E73;
+    color: white;
+    padding: 1.5em 2em;
+    border-radius: 0px 10px 10px 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.boton:hover{
+    background-color: #0267c7;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.boton a{
+    color: white;
+    text-decoration: none;
+}
+
+.texto{
+    padding: 0em 1em 0.5em;
+}
+
+.texto h2{
+    color: #003459;
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.texto p{
+    font-size: 1em;
+}
+
+.imagen{
+    height: 180px;
+}
+
+.cerraSesion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cerraSesion a{
+    color: #fff;
+    text-decoration: none;
+    padding: 1em 2em;
+    text-align: center;
+    background-color: red;
+    border-radius: 1em;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.cerraSesion a:hover{
+    background-color: #fff;
+    color: red;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.usuario{
+    gap: 1em;
+    display: flex;
+}
+
+.iniciarSesion {
+    background-color: #e91e63;
+    color: white;
+    padding: 1.5em 2.5em;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.iniciarSesion:hover{
+    background-color: #0267c7;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.iniciarSesion a{
+    color: white;
+    text-decoration: none;
+}
+
+.fondo{
+    background-image: linear-gradient(to left, #2170b4, #1b7cbf, #1587ca, #0d93d4, #049fde, #249ee2, #399ce6, #4a9ae9, #7088e0, #9073ce, #a85db4, #b84493);
+    height: 5em;
+    border-radius: 10px 10px 0 0;
+    position: sticky;
+    top: 0;
+    z-index: 1; /* Mantener la cabecera fija al hacer scroll */
+    color: #fff;
+}
+
+table{
+    width: 90%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-radius: 10px 10px 10px 10px;
+    border: 2px solid #0088ff;
+    scroll-margin: 2em;
+}
+
+tbody{
+    color: #000;
+}
+
+tr{
+    height: 3em;
+    text-align: center;
+}
+
+.tabla{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 500px; /* Altura máxima para el área scroll */
+    overflow-y: auto; /* Habilitar desplazamiento vertical */
+}
+
+.editar{
+    background: #E91E63;
+    color: #fff;
+    padding: 0.6em 1.2em;
+    border-radius: 0.5em;
+    border: 0;
+}
+
+.eliminar{
+    background: #FF4500;
+    color: #fff;
+    padding: 0.6em 1.2em;
+    border-radius: 0.5em;
+    border: 0;
+}

@@ -1,0 +1,103 @@
+package com.daza.api.servlet.controlagua.dto;
+
+public class Usuario {
+    private int id;
+    private String nombre;
+    private String apellido;
+    private String username;
+    private String password;
+    private double horasAcumuladas;
+    private int minutosGratisSemana;
+    private String rol;
+
+    public Usuario(int id, String nombre, String apellido, String username, String password, double horasAcumuladas, int minutosGratisSemana, String rol) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.username = username;
+        this.password = password;
+        this.horasAcumuladas = horasAcumuladas;
+        this.minutosGratisSemana = minutosGratisSemana;
+        this.rol = rol;
+    }
+
+    public Usuario(){}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public double getHorasAcumuladas() {
+        return horasAcumuladas;
+    }
+
+    public void setHorasAcumuladas(double horasAcumuladas) {
+        this.horasAcumuladas = horasAcumuladas;
+    }
+
+    public int getMinutosGratisSemana() {
+        return minutosGratisSemana;
+    }
+
+    public void setMinutosGratisSemana(int minutosGratisSemana) {
+        this.minutosGratisSemana = minutosGratisSemana;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", horasAcumuladas=" + horasAcumuladas +
+                ", minutosGratisSemana=" + minutosGratisSemana +
+                ", rol='" + rol + '\'' +
+                '}';
+    }
+}
