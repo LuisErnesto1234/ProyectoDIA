@@ -65,7 +65,7 @@ Puedes ingresar a [download](https://github.com/amitmerchant1990/electron-markdo
 	<li>MySQL</li>
 </ul>
 
-## Credits
+## Creditos
 
 Este software usa las siguientes tecnologias open source:
 
