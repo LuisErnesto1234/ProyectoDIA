@@ -14,7 +14,7 @@
   <a href="#descargar">Descargar</a> •
   <a href="#tecnologias">Tecnologias Usadas</a> •
   <a href="#creditos">Creditos</a> •
-  <a href="#licensia">Licensia</a>
+  <a href="#licencia">Licencia</a>
 </p>
 
 ![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
@@ -76,10 +76,6 @@ Este software usa las siguientes tecnologias open source:
 - [Maven](https://maven.apache.org/)
 - IntelliJ IDEA [aqui](https://www.jetbrains.com/idea/)
 
-## Relacionado
-
-[markdownify-web](https://github.com/amitmerchant1990/markdownify-web) - Web versión
-
 ## Soporte
 
 <a href="https://buymeacoffee.com/amitmerchant" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
@@ -90,7 +86,7 @@ Este software usa las siguientes tecnologias open source:
 	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
 </a>
 
-## Licensia
+## Licencia
 
 MIT
 
