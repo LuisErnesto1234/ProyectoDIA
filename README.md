@@ -92,6 +92,6 @@ MIT
 
 ---
 
-> GitHub [@amitmerchant1990](https://github.com/LuisErnesto1234) &nbsp;&middot;&nbsp;
-> Twitter/X [@amit_merchant](https://x.com/ErnestoDaz17css)
+> GitHub [@LuisErnesto1234](https://github.com/LuisErnesto1234) &nbsp;&middot;&nbsp;
+> Twitter/X [@ErnestoDaz17css](https://x.com/ErnestoDaz17css)
 
