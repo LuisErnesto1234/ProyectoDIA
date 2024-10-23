@@ -8,18 +8,20 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 @WebServlet("/user")
 public class UsuarioServlet extends HttpServlet {
 
     //TODO: Service instancia necesaria
     UsuarioService service = new UsuarioServiceImp();
-    private static boolean yaEjecuto = false; // Asegúrate de que sea estática para que persista a nivel de clase
 
     // Implementación del servlet para manejar las peticiones relacionadas con los usuarios
 
@@ -37,12 +39,16 @@ public class UsuarioServlet extends HttpServlet {
                 case "editar":
                     mostrarFormulario(req, resp);
                     break;
+                case "credenciales":
+                    mostrarFormularioCredencial(req, resp);
+                    break;
                 default:
                     resp.sendError(HttpServletResponse.SC_NOT_FOUND);
                     break;
             }
         }
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -55,11 +61,47 @@ public class UsuarioServlet extends HttpServlet {
                 case "agregar":
                     agregar(req, resp);
                     break;
+                case "crendenciales":
+                    credenciales(req, resp);
+                    break;
                 default:
                     resp.sendError(HttpServletResponse.SC_NOT_FOUND);
                     break;
             }
         }
+    }
+
+    private void mostrarFormularioCredencial(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        Usuario usuario = service.obtenerUsuarioPorId(id);
+        req.setAttribute("usuario", usuario);
+        req.getRequestDispatcher("personalizar.jsp").forward(req, resp);
+    }
+
+    protected void credenciales(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("usuario"); // Obtenemos el usuario de la sesión
+
+        if (usuario == null) {
+            // Si no hay un usuario en la sesión, redirige a la página de login u otro lugar
+            resp.sendRedirect("login.jsp");
+            return;
+        }
+
+        // Obtener los datos desde el formulario
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+
+        // Actualizar los datos del usuario en la base de datos
+        usuario.setUsername(username);
+        usuario.setPassword(password);
+        service.actualizarUsernamePassword(usuario);
+
+        // Actualizar la sesión con los nuevos datos del usuario
+        session.setAttribute("usuario", usuario);
+
+        // Redirigir después de la actualización
+        resp.sendRedirect("user?action=listar");  // Cambia esto según tu lógica
     }
 
     private void mostrarFormulario(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
@@ -81,6 +123,17 @@ public class UsuarioServlet extends HttpServlet {
         UsuarioService usuarioService = new UsuarioServiceImp();
         List<Usuario> listaUsuarios = usuarioService.listarUsuarios(); // Asegúrate de usar el servicio correcto
 
+        int admin = 0;
+        int cliente = 0;
+
+        for (Usuario usuario : listaUsuarios) {
+            if (usuario.getRol().equals("Administrador")) {
+                admin++;
+            } else {
+                cliente++;
+            }
+        }
+
         LocalDate fechaHoy = LocalDate.now();
         boolean esDomingo = fechaHoy.getDayOfWeek() == DayOfWeek.SUNDAY;
 
@@ -93,7 +146,15 @@ public class UsuarioServlet extends HttpServlet {
             ultimaEjecucion = fechaHoy;
         }
 
+        // Formatear la fecha (en español)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMMM - yyyy", new Locale("es", "ES"));
+        String fechaFormateada = fechaHoy.format(formatter);
+
+        // Colocar la fecha formateada en el request
+        req.setAttribute("fechaFormateada", fechaFormateada);
         req.setAttribute("lista", listaUsuarios);
+        req.setAttribute("admin", admin);
+        req.setAttribute("cliente", cliente);
         req.getRequestDispatcher("/listar-usuarios.jsp").forward(req, resp);
     }
 
@@ -128,4 +189,5 @@ public class UsuarioServlet extends HttpServlet {
         service.editarUsuario(new Usuario(id, nombre, apellido, username, password, horasAcumuladas, minutosGratisSemana, rol));
         resp.sendRedirect("user?action=listar");
     }
+
 }

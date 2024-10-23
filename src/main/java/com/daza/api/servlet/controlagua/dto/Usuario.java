@@ -21,6 +21,20 @@ public class Usuario {
         this.rol = rol;
     }
 
+    public Usuario(String nombre, String apellido){
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
+
+    public Usuario(int id, String nombre, String apellido, double horasAcumuladas, int minutosGratisSemana, String rol) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.horasAcumuladas = horasAcumuladas;
+        this.minutosGratisSemana = minutosGratisSemana;
+        this.rol = rol;
+    }
+
     public Usuario(){}
 
     public int getId() {

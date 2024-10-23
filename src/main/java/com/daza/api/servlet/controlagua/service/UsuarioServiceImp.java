@@ -5,7 +5,10 @@ import com.daza.api.servlet.controlagua.dto.Usuario;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class UsuarioServiceImp implements UsuarioService{
     UsuarioDAO dao = new UsuarioDAO();
@@ -62,5 +65,15 @@ public class UsuarioServiceImp implements UsuarioService{
         for (Usuario usuario : lista){
             acumularMinutosUsuarios(usuario);
         }
+    }
+
+    @Override
+    public List<Usuario> buscarUsuarios(String query) {
+        return dao.findUserByName(query);
+    }
+
+    @Override
+    public void actualizarUsernamePassword(Usuario usuario) {
+        dao.updateUsernamePassword(usuario);
     }
 }

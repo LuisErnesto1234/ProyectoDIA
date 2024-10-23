@@ -18,6 +18,8 @@ public class UsuarioDAO {
     private static final String SQL_UPDATE = "UPDATE tb_usuarios SET nombre=?, apellidos=?, username=?, pass=?, horas_acumuladas=?, minutos_gratis_semana=?, rol=? WHERE id_usuario=?";
     private static final String SQL_FIND_BY_ID = "SELECT * FROM tb_usuarios WHERE id_usuario = ?";
     private static final String SQL_OBTENER_POR_NOMBRE = "SELECT * FROM tb_usuarios WHERE username = ? AND pass = ?";
+    private static final String SQL_BUSCAR_USUARIO = "SELECT * FROM tb_usuarios WHERE nombre LIKE ? OR apellidos LIKE ?";
+    private static final String SQL_UPDATE_USERNAME_PASSWORD = "UPDATE tb_usuarios SET username=?, pass=? WHERE id_usuario=?";
 
     /*TODO: IMPLEMENTAMOS EL MÉTODO PARA RETORNAR UN LISTADO DE USUARIOS:*/
     public List<Usuario> getUsuarios() {
@@ -63,7 +65,7 @@ public class UsuarioDAO {
             ps.executeUpdate();
 
     }catch (SQLException e) {
-        e.printStackTrace();
+            System.out.println(e.getMessage());
     }
 }
 
@@ -75,7 +77,7 @@ public class UsuarioDAO {
             ps.executeUpdate();
 
         }catch (SQLException e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -92,7 +94,7 @@ public class UsuarioDAO {
             ps.setInt(8, user.getId());
             ps.executeUpdate();
         }catch (SQLException e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -112,10 +114,10 @@ public class UsuarioDAO {
                             rs.getString("rol"));
                 }
             }catch (Exception e){
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }catch (SQLException e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -137,12 +139,58 @@ public class UsuarioDAO {
                             rs.getString("rol"));
                 }
             }catch (Exception e){
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }catch (SQLException e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public List<Usuario> findUserByName(String query){
+
+        List<Usuario> usuarios = new ArrayList<>();
+
+        try(Connection cn = ConexionMySQL.getConexion();
+            PreparedStatement ps = cn.prepareStatement(SQL_BUSCAR_USUARIO)){
+
+            // Asignar los parámetros en la consulta SQL
+            ps.setString(1, "%" + query + "%");
+            ps.setString(2, "%" + query + "%");
+
+
+            try(ResultSet rs = ps.executeQuery()){
+                while (rs.next()){
+                    Usuario user = new Usuario(
+                            rs.getInt("id_usuario"),
+                            rs.getString("nombre"),
+                            rs.getString("apellidos"),
+                            rs.getDouble("horas_acumuladas"),
+                            rs.getInt("minutos_gratis_semana"),
+                            rs.getString("rol"));
+                            usuarios.add(user);
+                }
+            }catch (SQLException e){
+                System.out.println(e.getMessage());
+            }
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return usuarios;
+    }
+
+    public void updateUsernamePassword(Usuario user){
+        try(Connection cn = ConexionMySQL.getConexion();
+        PreparedStatement ps = cn.prepareStatement(SQL_UPDATE_USERNAME_PASSWORD)){
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getPassword());
+            ps.setInt(3, user.getId());
+            ps.executeUpdate();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 
 }

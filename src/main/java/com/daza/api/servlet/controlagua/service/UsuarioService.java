@@ -13,4 +13,6 @@ public interface UsuarioService {
     void eliminarUsuario(int id);
     void acumularMinutosUsuarios(Usuario usuario);
     void actualizarUsuariosMinutos(List<Usuario> lista);
+    List<Usuario> buscarUsuarios(String query);
+    void actualizarUsernamePassword(Usuario usuario);
 }

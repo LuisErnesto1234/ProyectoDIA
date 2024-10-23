@@ -14,8 +14,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Locale;
 
 @WebServlet("/control")
 public class ControlServlet extends HttpServlet {
@@ -96,6 +98,14 @@ public class ControlServlet extends HttpServlet {
 
     private void listarControl(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException{
         List<Registro> registros = service.obtenerRegistros();
+
+        LocalDate fechaHoy = LocalDate.now();
+        // Formatear la fecha (en español)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMMM - yyyy", new Locale("es", "ES"));
+        String fechaFormateada = fechaHoy.format(formatter);
+
+        // Colocar la fecha formateada en el request
+        req.setAttribute("fechaFormateada", fechaFormateada);
         req.setAttribute("registros", registros);
         req.getRequestDispatcher("listar-control.jsp").forward(req, resp);
     }

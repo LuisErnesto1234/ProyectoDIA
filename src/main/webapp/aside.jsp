@@ -1,109 +1,33 @@
+<%@ page import="com.daza.api.servlet.controlagua.dto.Usuario" %>
+<%@ page import="com.daza.api.servlet.controlagua.service.UsuarioService" %>
+<%@ page import="com.daza.api.servlet.controlagua.service.UsuarioServiceImp" %>
+<%@ page import="java.util.List" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Header</title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="shortcut icon" href="imagenes/logoDIA.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://cdn.tailwindcss.com"></script>
-
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
 </head>
 <body>
-
-<style>
-    .gradiente{
-        background: #0f0c29;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    }
-</style>
-
-<button data-drawer-target="sidebar-multi-level-sidebar" data-drawer-toggle="sidebar-multi-level-sidebar" aria-controls="sidebar-multi-level-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 transition-all duration-300">
+<%
+    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    UsuarioService service = new UsuarioServiceImp();
+    List<Usuario> usuarios = service.listarUsuarios();
+%>
+<button data-drawer-target="sidebar-multi-level-sidebar" data-drawer-toggle="sidebar-multi-level-sidebar" aria-controls="sidebar-multi-level-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
     <span class="sr-only">Open sidebar</span>
     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
     </svg>
 </button>
 
-<main class="p-6 sm:ml-64 w-full bg-gray-50 dark:bg-gray-900 min-h-screen">
-    <div class="border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 shadow-lg bg-white dark:bg-gray-800">
-
-        <div class="lg:flex w-full lg:w-full h-16 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 relative rounded-t-lg">
-            <div class="absolute inset-0 bg-black opacity-30 z-0"></div>
-        </div>
-
-        <div class="p-6 space-y-6">
-            <h1 class="text-4xl font-bold text-center text-gray-800 dark:text-white">Personalizar</h1>
-
-            <form method="post" action="user?action=crendenciales" class="space-y-6">
-                <div class="flex flex-col lg:flex-row gap-6">
-                    <div class="lg:w-1/2 flex flex-col items-center space-y-4">
-                        <input type="hidden" name="id" value="<%=usuario.getId()%>">
-                        <div class="w-32 h-32">
-                            <img src="imagenes/perfil.png" class="w-full h-full rounded-full border-4 border-indigo-600 dark:border-gray-700 object-cover">
-                        </div>
-
-                        <div class="w-full">
-                            <label for="nombre" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nombres: </label>
-                            <input id="nombre" disabled type="text" value="<%=usuario.getNombre()%>"
-                                   class="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white p-2.5">
-                        </div>
-
-                        <div class="w-full">
-                            <label for="apellido" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Apellidos: </label>
-                            <input id="apellido" disabled type="text" value="<%=usuario.getApellido()%>"
-                                   class="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white p-2.5">
-                        </div>
-                    </div>
-
-                    <div class="lg:w-1/2 space-y-4">
-                        <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Datos Adicionales:</h2>
-
-                        <div>
-                            <label for="horas" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Horas Acumuladas: </label>
-                            <input id="horas" disabled type="text" value="20.0"
-                                   class="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white p-2.5">
-                        </div>
-
-                        <div>
-                            <label for="minutos" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Minutos Semana: </label>
-                            <input id="minutos" disabled type="text" value="60"
-                                   class="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white p-2.5">
-                        </div>
-
-                        <div>
-                            <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Username: </label>
-                            <input id="username" name="username" type="text" value="<%=usuario.getUsername()%>"
-                                   class="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white p-2.5">
-                        </div>
-
-                        <div>
-                            <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Contraseña: </label>
-                            <input id="password" name="password" type="password" value="<%=usuario.getPassword()%>"
-                                   class="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:text-white p-2.5">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex justify-center">
-                    <input type="submit" value="Actualizar"
-                           class="py-2 px-6 font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-indigo-700 dark:hover:bg-indigo-800 dark:focus:ring-indigo-800">
-                </div>
-            </form>
-        </div>
-    </div>
-</main>
-
-<!-- Botón para abrir/cerrar el sidebar en pantallas pequeñas -->
-<button data-drawer-target="sidebar-multi-level-sidebar" data-drawer-toggle="sidebar-multi-level-sidebar" aria-controls="sidebar-multi-level-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 transition-all duration-300">
-    <span class="sr-only">Open sidebar</span>
-    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
-    </svg>
-</button>
-
-<!-- Sidebar responsive -->
 <aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 shadow-lg bg-gradient-to-b from-gray-50 to-gray-200 dark:from-gray-800 dark:to-gray-900" aria-label="Sidebar">
     <div class="h-full px-4 py-6 overflow-y-auto">
         <ul class="space-y-6 font-medium">
@@ -199,8 +123,6 @@
         </ul>
     </div>
 </aside>
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 
